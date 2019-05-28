@@ -1,53 +1,24 @@
-# Action Cable Node
-Action Cable extracted from Rails 5 and packaged as a Node module
+# Action Cable – Integrated WebSockets for Rails
 
-## Install
+Action Cable seamlessly integrates WebSockets with the rest of your Rails application.
+It allows for real-time features to be written in Ruby in the same style
+and form as the rest of your Rails application, while still being performant
+and scalable. It's a full-stack offering that provides both a client-side
+JavaScript framework and a server-side Ruby framework. You have access to your full
+domain model written with Active Record or your ORM of choice.
 
-```
-npm install action-cable-node --save
-```
+You can read more about Action Cable in the [Action Cable Overview](https://edgeguides.rubyonrails.org/action_cable_overview.html) guide.
 
-## Usage
+## Support
 
-It has all the same methods as ActionCable and usage is exactly the same.
+API documentation is at:
 
-```
-import ActionCable from 'action-cable-node'
+* https://api.rubyonrails.org
 
-const App = {}
+Bug reports for the Ruby on Rails project can be filed here:
 
-App.cable = ActionCable.createConsumer()
+* https://github.com/rails/rails/issues
 
-App.cable.subscriptions.create({ channel: "ChatChannel", room: "Best room!"})
+Feature requests should be discussed on the rails-core mailing list here:
 
-etc...
-```
-
-See the ActionCable [documentation](http://edgeguides.rubyonrails.org/action_cable_overview.html) for more.
-
-## License
-
-#### The MIT License (MIT)
-
-Based on ActionCable, converted into a node module format by Tom Chinery <hello@tomchinery.com>.
-
-Permission is hereby granted, free of charge, to any person
-obtaining a copy of this software and associated documentation
-files (the “Software”), to deal in the Software without
-restriction, including without limitation the rights to use,
-copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the
-Software is furnished to do so, subject to the following
-conditions:
-
-The above copyright notice and this permission notice shall be
-included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND,
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
-OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
-HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
-WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-OTHER DEALINGS IN THE SOFTWARE.
+* https://groups.google.com/forum/?fromgroups#!forum/rubyonrails-core
