@@ -8,28 +8,12 @@ var ActionCable = function () {
   this.internal = INTERNAL
 }
 
-ActionCable.prototype.createConsumer = function (url) {
-  var defaultURL = this.getConfig("url")
-  if (url == null) {
-    url = defaultURL != null ? defaultURL : this.internal.default_mount_path
-  }
-  return new Consumer(this.createWebSocketURL(url))
-}
-
-ActionCable.prototype.getConfig = function (name) {
-  var element = document.head.querySelector("meta[name='action-cable-" + name + "']")
-  return element != null ? element.getAttribute("content") : void 0
+ActionCable.prototype.createConsumer = function (url, ws) {
+  return new Consumer(this.createWebSocketURL(url), ws)
 }
 
 ActionCable.prototype.createWebSocketURL = function (url) {
-  if (url && /^wss?:/i.test(url) != true) {
-    var a = document.createElement("a")
-    a.href = url
-    a.protocol = a.protocol.replace("http", "ws")
-    return a.href
-  } else {
-    return url
-  }
+  return url
 }
 
 ActionCable.prototype.startDebugging = function () {

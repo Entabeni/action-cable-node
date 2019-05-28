@@ -2,8 +2,9 @@ var INTERNAL = require('../internal.js')
 var Subscriptions = require('./subscriptions.js')
 var Connection = require('./connection.js')
 
-var Consumer = function (url) {
+var Consumer = function (url, ws) {
   this.url = url
+  this.ws = ws
   this.subscriptions = new Subscriptions(this)
   this.connection = new Connection(this)
 }

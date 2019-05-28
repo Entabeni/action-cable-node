@@ -40,7 +40,7 @@ Connection.prototype.open = function () {
     if (this.webSocket != null) {
       this.uninstallEventHandlers()
     }
-    this.webSocket = new WebSocket(this.consumer.url, protocols)
+    this.webSocket = new this.consumer.ws(this.consumer.url, protocols)
     this.installEventHandlers()
     this.monitor.start()
     return true
@@ -100,8 +100,8 @@ Connection.prototype.isState = function (states) {
 
 Connection.prototype.getState = function () {
   var ref, state, value;
-  for (state in WebSocket) {
-    value = WebSocket[state];
+  for (state in this.consumer.ws) {
+    value = this.consumer.ws[state];
     if (value === ((ref = this.webSocket) != null ? ref.readyState : void 0)) {
       return state.toLowerCase();
     }
