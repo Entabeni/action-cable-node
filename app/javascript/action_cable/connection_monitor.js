@@ -111,7 +111,7 @@ class ConnectionMonitor {
     //   }
     //   , 200)
     // }
-    logger.log('Visibility changed')
+    logger.log("Visibility changed")
   }
 
 }

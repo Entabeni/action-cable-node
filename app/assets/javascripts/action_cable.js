@@ -131,15 +131,7 @@
       return this.disconnectedAt && secondsSince(this.disconnectedAt) < this.constructor.staleThreshold;
     };
     ConnectionMonitor.prototype.visibilityDidChange = function visibilityDidChange() {
-      var _this2 = this;
-      if (document.visibilityState === "visible") {
-        setTimeout(function() {
-          if (_this2.connectionIsStale() || !_this2.connection.isOpen()) {
-            logger.log("ConnectionMonitor reopening stale connection on visibilitychange. visbilityState = " + document.visibilityState);
-            _this2.connection.reopen();
-          }
-        }, 200);
-      }
+      logger.log("Visibility changed");
     };
     return ConnectionMonitor;
   }();
@@ -152,15 +144,9 @@
   var INTERNAL = {
     message_types: {
       welcome: "welcome",
-      disconnect: "disconnect",
       ping: "ping",
       confirmation: "confirm_subscription",
       rejection: "reject_subscription"
-    },
-    disconnect_reasons: {
-      unauthorized: "unauthorized",
-      invalid_request: "invalid_request",
-      server_restart: "server_restart"
     },
     default_mount_path: "/cable",
     protocols: [ "actioncable-v1-json", "actioncable-unsupported" ]
@@ -194,7 +180,7 @@
         if (this.webSocket) {
           this.uninstallEventHandlers();
         }
-        this.webSocket = new adapters.WebSocket(this.consumer.url, protocols);
+        this.webSocket = new this.consumer.ws(this.consumer.url, protocols);
         this.installEventHandlers();
         this.monitor.start();
         return true;
@@ -446,9 +432,10 @@
     return Subscriptions;
   }();
   var Consumer = function() {
-    function Consumer(url) {
+    function Consumer(url, ws) {
       classCallCheck(this, Consumer);
       this._url = url;
+      this.ws = ws;
       this.subscriptions = new Subscriptions(this);
       this.connection = new Connection(this);
     }
@@ -480,25 +467,13 @@
     if (typeof url === "function") {
       url = url();
     }
-    if (url && !/^wss?:/i.test(url)) {
-      var a = document.createElement("a");
-      a.href = url;
-      a.href = a.href;
-      a.protocol = a.protocol.replace("http", "ws");
-      return a.href;
-    } else {
-      return url;
-    }
+    return url;
   }
-  function createConsumer() {
-    var url = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : getConfig("url") || INTERNAL.default_mount_path;
-    return new Consumer(url);
+  function createConsumer(url, ws) {
+    return new Consumer(url, ws);
   }
   function getConfig(name) {
-    var element = document.head.querySelector("meta[name='action-cable-" + name + "']");
-    if (element) {
-      return element.getAttribute("content");
-    }
+    return name;
   }
   exports.Connection = Connection;
   exports.ConnectionMonitor = ConnectionMonitor;

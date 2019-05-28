@@ -35,7 +35,7 @@ class Connection {
     } else {
       logger.log(`Opening WebSocket, current state is ${this.getState()}, subprotocols: ${protocols}`)
       if (this.webSocket) { this.uninstallEventHandlers() }
-      this.webSocket = new consumer.ws(this.consumer.url, protocols)
+      this.webSocket = new this.consumer.ws(this.consumer.url, protocols)
       this.installEventHandlers()
       this.monitor.start()
       return true

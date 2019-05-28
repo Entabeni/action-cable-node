@@ -41,11 +41,11 @@
     "rollup-plugin-uglify": "^3.0.0"
   },
   "scripts": {
-    "prebuild": "yarn lint && bundle exec rake assets:codegen",
+    "prebuild": "yarn lint",
     "build": "rollup --config rollup.config.js",
     "lint": "eslint app/javascript",
     "prepublishOnly": "rm -rf src && cp -R app/javascript/action_cable src",
-    "pretest": "bundle exec rake assets:codegen && rollup --config rollup.config.test.js",
+    "pretest": "rollup --config rollup.config.test.js",
     "test": "karma start"
   }
 }
