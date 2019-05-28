@@ -3,8 +3,8 @@
 })(this, function(exports) {
   "use strict";
   var adapters = {
-    logger: self.console,
-    WebSocket: self.WebSocket
+    logger: console,
+    WebSocket: null
   };
   var logger = {
     log: function log() {
