@@ -19,7 +19,7 @@ clamp = function(number, min, max) {
 
 var ConnectionMonitor = function (connection) {
   this.connection = connection
-  this.visibilityDidChange = bind(this.visibilityDidChange, this)
+  //this.visibilityDidChange = bind(this.visibilityDidChange, this)
   this.reconnectAttempts = 0
   this.pollInterval = {
     min: 3,
@@ -33,7 +33,7 @@ ConnectionMonitor.prototype.start = function () {
     this.startedAt = now();
     delete this.stoppedAt;
     this.startPolling();
-    document.addEventListener("visibilitychange", this.visibilityDidChange);
+    //document.addEventListener("visibilitychange", this.visibilityDidChange);
     return Logger.log(["ConnectionMonitor started. pollInterval = " + (this.getPollInterval()) + " ms"]);
   }
 }
@@ -42,7 +42,7 @@ ConnectionMonitor.prototype.stop = function () {
   if (this.isRunning()) {
     this.stoppedAt = now();
     this.stopPolling();
-    document.removeEventListener("visibilitychange", this.visibilityDidChange);
+    //document.removeEventListener("visibilitychange", this.visibilityDidChange);
     return Logger.log("ConnectionMonitor stopped");
   }
 }
@@ -115,17 +115,17 @@ ConnectionMonitor.prototype.disconnectedRecently = function () {
   return this.disconnectedAt && secondsSince(this.disconnectedAt) < this.staleThreshold
 }
 
-ConnectionMonitor.prototype.visibilityDidChange = function () {
-  if (document.visibilityState === "visible") {
-    return setTimeout((function(_this) {
-      return function() {
-        if (_this.connectionIsStale() || !_this.connection.isOpen()) {
-          Logger.log(["ConnectionMonitor reopening stale connection on visibilitychange. visbilityState = " + document.visibilityState]);
-          return _this.connection.reopen();
-        }
-      };
-    })(this), 200);
-  }
-}
+// ConnectionMonitor.prototype.visibilityDidChange = function () {
+//   if (document.visibilityState === "visible") {
+//     return setTimeout((function(_this) {
+//       return function() {
+//         if (_this.connectionIsStale() || !_this.connection.isOpen()) {
+//           Logger.log(["ConnectionMonitor reopening stale connection on visibilitychange. visbilityState = " + document.visibilityState]);
+//           return _this.connection.reopen();
+//         }
+//       };
+//     })(this), 200);
+//   }
+// }
 
 module.exports = ConnectionMonitor
