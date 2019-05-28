@@ -21,7 +21,7 @@ class ConnectionMonitor {
       this.startedAt = now()
       delete this.stoppedAt
       this.startPolling()
-      addEventListener("visibilitychange", this.visibilityDidChange)
+      //addEventListener("visibilitychange", this.visibilityDidChange)
       logger.log(`ConnectionMonitor started. pollInterval = ${this.getPollInterval()} ms`)
     }
   }
@@ -30,7 +30,7 @@ class ConnectionMonitor {
     if (this.isRunning()) {
       this.stoppedAt = now()
       this.stopPolling()
-      removeEventListener("visibilitychange", this.visibilityDidChange)
+      //removeEventListener("visibilitychange", this.visibilityDidChange)
       logger.log("ConnectionMonitor stopped")
     }
   }
