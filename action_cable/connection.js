@@ -40,7 +40,9 @@ Connection.prototype.open = function () {
     if (this.webSocket != null) {
       this.uninstallEventHandlers()
     }
-    this.webSocket = new this.consumer.ws(this.consumer.url, protocols)
+    this.webSocket = new this.consumer.ws(this.consumer.url, protocols, {
+      origin: 'http://localhost:3000'
+    })
     this.installEventHandlers()
     this.monitor.start()
     return true
