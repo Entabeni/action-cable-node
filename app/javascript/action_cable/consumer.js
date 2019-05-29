@@ -1,5 +1,6 @@
 import Connection from "./connection"
 import Subscriptions from "./subscriptions"
+import logger from "./logger"
 
 // The ActionCable.Consumer establishes the connection to a server-side Ruby Connection object. Once established,
 // the ActionCable.ConnectionMonitor will ensure that its properly maintained through heartbeats and checking for stale updates.
@@ -12,7 +13,7 @@ import Subscriptions from "./subscriptions"
 //   App.cable = ActionCable.createConsumer("ws://example.com/accounts/1")
 //   App.appearance = App.cable.subscriptions.create("AppearanceChannel")
 //
-// For more details on how you'd configure an actual channel subscription, see ActionCable.Subscription.
+// For more details on how you"d configure an actual channel subscription, see ActionCable.Subscription.
 //
 // When a consumer is created, it automatically connects with the server.
 //
@@ -40,18 +41,23 @@ export default class Consumer {
   }
 
   send(data) {
+    logger.log("sending data")
+    logger.log(data)
     return this.connection.send(data)
   }
 
   connect() {
+    logger.log("connecting")
     return this.connection.open()
   }
 
   disconnect() {
+    logger.log("disconnecting")
     return this.connection.close({allowReconnect: false})
   }
 
   ensureActiveConnection() {
+    logger.log("disconnecting")
     if (!this.connection.isActive()) {
       return this.connection.open()
     }

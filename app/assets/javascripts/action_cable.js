@@ -438,17 +438,22 @@
       this.connection = new Connection(this);
     }
     Consumer.prototype.send = function send(data) {
+      logger.log("sending data");
+      logger.log(data);
       return this.connection.send(data);
     };
     Consumer.prototype.connect = function connect() {
+      logger.log("connecting");
       return this.connection.open();
     };
     Consumer.prototype.disconnect = function disconnect() {
+      logger.log("disconnecting");
       return this.connection.close({
         allowReconnect: false
       });
     };
     Consumer.prototype.ensureActiveConnection = function ensureActiveConnection() {
+      logger.log("disconnecting");
       if (!this.connection.isActive()) {
         return this.connection.open();
       }
