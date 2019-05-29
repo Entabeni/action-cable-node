@@ -129,12 +129,11 @@ Connection.prototype.uninstallEventHandlers = function () {
 Connection.prototype.events = function () {
   return {
     message: function (event) {
-      Logger.log(["Received message " + event]);
       var identifier, message, ref, type;
       if (!this.isProtocolSupported()) {
         return;
       }
-      ref = JSON.parse(event.data), identifier = ref.identifier, message = ref.message, type = ref.type;
+      ref = JSON.parse(event), identifier = ref.identifier, message = ref.message, type = ref.type;
       switch (type) {
         case message_types.welcome:
           this.monitor.recordConnect();
