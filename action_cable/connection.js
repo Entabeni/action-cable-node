@@ -170,7 +170,7 @@ Connection.prototype.events = function () {
       });
     },
     error: function() {
-      return log("WebSocket onerror event");
+      return Logger.log(["WebSocket onerror event"]);
     }
   }
 }
