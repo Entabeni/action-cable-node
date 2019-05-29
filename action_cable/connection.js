@@ -113,15 +113,15 @@ Connection.prototype.getState = function () {
 
 Connection.prototype.installEventHandlers = function () {
   var eventName, handler;
-  for (eventName in this.events) {
-    handler = this.events[eventName].bind(this);
+  for (eventName in this.events()) {
+    handler = this.events()[eventName].bind(this);
     this.webSocket.on(eventName, handler);
   }
 }
 
 Connection.prototype.uninstallEventHandlers = function () {
   var eventName;
-  for (eventName in this.events) {
+  for (eventName in this.events()) {
     this.webSocket.on(eventName, function () { });
   }
 }
