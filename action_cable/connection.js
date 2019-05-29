@@ -128,7 +128,8 @@ Connection.prototype.uninstallEventHandlers = function () {
 
 Connection.prototype.events = function () {
   return {
-    message: function(event) {
+    message: function (event) {
+      Logger.log(["Received message " + event]);
       var identifier, message, ref, type;
       if (!this.isProtocolSupported()) {
         return;
