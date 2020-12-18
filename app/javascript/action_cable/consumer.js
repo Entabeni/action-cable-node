@@ -42,7 +42,7 @@ export default class Consumer {
 
   send(data) {
     logger.log("sending data")
-    logger.log(data)
+    // logger.log(data)
     return this.connection.send(data)
   }
 
